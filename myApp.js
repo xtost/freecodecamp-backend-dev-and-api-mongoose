@@ -77,10 +77,18 @@ const findPersonById = (personId, done) => {
   //done(null /*, data*/);
 };
 
+//8 https://www.freecodecamp.org/learn/back-end-development-and-apis/mongodb-and-mongoose/perform-classic-updates-by-running-find-edit-then-save
+//8 https://mongoosejs.com/docs/api.html#document_Document-markModified
 const findEditThenSave = (personId, done) => {
   const foodToAdd = "hamburger";
 
-  done(null /*, data*/);
+  let personDoc = Person.findById(personId,(err, data) => (err ? done(err) : done(null, data)));
+  personDoc.favoriteFoods.push(foodToAdd);
+  personDoc.markModified('edited-field');
+
+  personDoc.save((err, data) => (err ? done(err) : done(null, data)));
+
+  //done(null /*, data*/);
 };
 
 const findAndUpdate = (personName, done) => {
