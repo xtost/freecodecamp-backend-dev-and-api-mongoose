@@ -113,8 +113,12 @@ const findAndUpdate = (personName, done) => {
   //done(null /*, data*/);
 };
 
+//10 https://www.freecodecamp.org/learn/back-end-development-and-apis/mongodb-and-mongoose/delete-one-document-using-model-findbyidandremove
+//10 https://mongoosejs.com/docs/api.html#model_Model.findOneAndRemove
+//10 https://mongoosejs.com/docs/api.html#model_Model.findByIdAndRemove
 const removeById = (personId, done) => {
-  done(null /*, data*/);
+  Person.findByIdAndRemove(personId,(err, data) => (err ? done(err) : done(null, data)));
+ // done(null /*, data*/);
 };
 
 const removeManyPeople = (done) => {
