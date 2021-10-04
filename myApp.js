@@ -70,8 +70,11 @@ const findOneByFood = (food, done) => {
   //done(null /*, data*/);
 };
 
+//7 https://mongoosejs.com/docs/api.html#model_Model.findById
 const findPersonById = (personId, done) => {
-  done(null /*, data*/);
+  Person.findById(personId,(err, data) => (err ? done(err) : done(null, data)));
+  // Person.findOne(personId).exec();
+  //done(null /*, data*/);
 };
 
 const findEditThenSave = (personId, done) => {
