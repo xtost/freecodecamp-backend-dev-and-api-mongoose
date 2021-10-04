@@ -51,12 +51,16 @@ let arrayOfPeople = [{
   }];
 
 const createManyPeople = (arrayOfPeople, done) => {
-  Person.create((err, data) => (err ? done(err) : done(null, data)));
+  Person.create(arrayOfPeople,(err, data) => (err ? done(err) : done(null, data)));
+  //or insertMany for large batches of documents
   // done(null /*, data*/);
 };
 
+  //5 https://mongoosejs.com/docs/api.html#model_Model.find
 const findPeopleByName = (personName, done) => {
-  done(null /*, data*/);
+  Person.find({name: personName},(err, data) => (err ? done(err) : done(null, data)));
+ // Person.find({name: personName}).exec();
+  //done(null /*, data*/);
 };
 
 const findOneByFood = (food, done) => {
