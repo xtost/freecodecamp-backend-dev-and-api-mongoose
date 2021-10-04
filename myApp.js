@@ -82,11 +82,11 @@ const findPersonById = (personId, done) => {
 const findEditThenSave = (personId, done) => {
   const foodToAdd = "hamburger";
 
-  let personDoc = Person.findById(personId,(err, data) => (err ? done(err) : done(null, data)));
-  personDoc.favoriteFoods.push(foodToAdd);
-  personDoc.markModified('edited-field');
+  Person.findById(personId,(err, data) => (err ? done(err) : done(null, data)));
+  data.favoriteFoods.push(foodToAdd);
+  data.markModified('edited-field');
 
-  personDoc.save((err, data) => (err ? done(err) : done(null, data)));
+  data.save((err, updatedPerson) => (err ? done(err) : done(null, updatedPerson)));
 
   //done(null /*, data*/);
 };
