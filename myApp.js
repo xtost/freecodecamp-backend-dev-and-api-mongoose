@@ -142,10 +142,20 @@ If you don’t pass the callback as the last argument to Model.find() (or to the
 
 Modify the queryChain function to find people who like the food specified by the variable named foodToSearch. Sort them by name, limit the results to two documents, and hide their age. Chain .find(), .sort(), .limit(), .select(), and then .exec(). Pass the done(err, data) callback to exec().
 */
+//12 https://mongoosejs.com/docs/api.html#aggregate_Aggregate-sort
+//12 https://mongoosejs.com/docs/api.html#query_Query-limit
+//12 https://mongoosejs.com/docs/api.html#query_Query-select
+//12 https://mongoosejs.com/docs/api.html#query_Query-exec
 const queryChain = (done) => {
   const foodToSearch = "burrito";
 
-  done(null /*, data*/);
+  Person.find({ name: personName })
+  .sort({ name: 'asc'})
+  .limit(2)
+  .select('-age')
+  .exec((err, data) => (err ? done(err) : done(null, data)));
+
+  //done(null /*, data*/);
 };
 
 /** **Well Done !!**
