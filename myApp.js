@@ -63,7 +63,10 @@ const findPeopleByName = (personName, done) => {
   //done(null /*, data*/);
 };
 
+//6 https://mongoosejs.com/docs/api.html#model_Model.findOne
 const findOneByFood = (food, done) => {
+  Person.findOne({favoriteFoods: food},(err, data) => (err ? done(err) : done(null, data)));
+  // Person.findOne({favoriteFoods: food}).exec();
   done(null /*, data*/);
 };
 
