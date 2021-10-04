@@ -121,6 +121,13 @@ const removeById = (personId, done) => {
  // done(null /*, data*/);
 };
 
+//11 https://www.freecodecamp.org/learn/back-end-development-and-apis/mongodb-and-mongoose/delete-many-documents-with-model-remove
+//11 https://mongoosejs.com/docs/api.html#model_Model.remove
+/* 11
+    Note: The Model.remove() doesn’t return the deleted document, but a JSON object containing the outcome 
+    of the operation, and the number of items affected. Don’t forget to pass it to the done() callback, 
+    since we use it in tests.
+*/
 const removeManyPeople = (done) => {
   const nameToRemove = "Mary";
 
