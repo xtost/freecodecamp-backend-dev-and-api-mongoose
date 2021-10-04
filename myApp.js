@@ -87,8 +87,9 @@ const findEditThenSave = (personId, done) => {
       done(err);
     }
     data.favoriteFoods.push(foodToAdd);
-    data.markModified('edited-field');
+    data.markModified('edited-field'); //for "mixed arrays"
 
+    //done in here, at the very end, when we have finished
     data.save((err, updatedPerson) => (err ? done(err) : done(null, updatedPerson)));
 
     //done(null /*, data*/);
@@ -96,10 +97,20 @@ const findEditThenSave = (personId, done) => {
 };
 
 
+//9 https://www.freecodecamp.org/learn/back-end-development-and-apis/mongodb-and-mongoose/perform-new-updates-on-a-document-using-model-findoneandupdate
+//9 https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate
+//9 https://mongoosejs.com/docs/api.html#model_Model.findOneAndUpdate
 const findAndUpdate = (personName, done) => {
   const ageToSet = 20;
+  /*
+  Note: You should return the updated document. To do that, you need to pass the options document { new: true } as the 3rd argument to findOneAndUpdate(). By default, these methods return the unmodified object.
+  */
+  Person.findOneAndUpdate({ name: personName },
+    { age: ageToSet },
+    { new: true },
+    (err, data) => (err ? done(err) : done(null, data)));
 
-  done(null /*, data*/);
+  //done(null /*, data*/);
 };
 
 const removeById = (personId, done) => {
