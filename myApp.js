@@ -33,8 +33,8 @@ const createAndSavePerson = (done) => {
 };
 
 //4
-/*
-let myArrayOfPeople = [{
+
+let arrayOfPeople = [{
   name: 'XaviMany1',
   age: 21,
   favoriteFoods: ['pizza1', 'hotdog1']
@@ -50,7 +50,6 @@ let myArrayOfPeople = [{
     favoriteFoods: ['pizza3', 'hotdog3']
   }];
 
-*/
 const createManyPeople = (arrayOfPeople, done) => {
   Person.create((err, data) => (err ? done(err) : done(null, data)));
   // done(null /*, data*/);
