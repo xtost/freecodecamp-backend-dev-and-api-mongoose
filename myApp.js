@@ -39,40 +39,40 @@ let arrayOfPeople = [{
   age: 21,
   favoriteFoods: ['pizza1', 'hotdog1']
 },
-  {
-    name: 'XaviMany2',
-    age: 22,
-    favoriteFoods: ['pizza2', 'hotdog2']
-  },
-  {
-    name: 'XaviMany3',
-    age: 23,
-    favoriteFoods: ['pizza3', 'hotdog3']
-  }];
+{
+  name: 'XaviMany2',
+  age: 22,
+  favoriteFoods: ['pizza2', 'hotdog2']
+},
+{
+  name: 'XaviMany3',
+  age: 23,
+  favoriteFoods: ['pizza3', 'hotdog3']
+}];
 
 const createManyPeople = (arrayOfPeople, done) => {
-  Person.create(arrayOfPeople,(err, data) => (err ? done(err) : done(null, data)));
+  Person.create(arrayOfPeople, (err, data) => (err ? done(err) : done(null, data)));
   //or insertMany for large batches of documents
   // done(null /*, data*/);
 };
 
-  //5 https://mongoosejs.com/docs/api.html#model_Model.find
+//5 https://mongoosejs.com/docs/api.html#model_Model.find
 const findPeopleByName = (personName, done) => {
-  Person.find({name: personName},(err, data) => (err ? done(err) : done(null, data)));
- // Person.find({name: personName}).exec();
+  Person.find({ name: personName }, (err, data) => (err ? done(err) : done(null, data)));
+  // Person.find({name: personName}).exec();
   //done(null /*, data*/);
 };
 
 //6 https://mongoosejs.com/docs/api.html#model_Model.findOne
 const findOneByFood = (food, done) => {
-  Person.findOne({favoriteFoods: food},(err, data) => (err ? done(err) : done(null, data)));
+  Person.findOne({ favoriteFoods: food }, (err, data) => (err ? done(err) : done(null, data)));
   // Person.findOne({favoriteFoods: food}).exec();
   //done(null /*, data*/);
 };
 
 //7 https://mongoosejs.com/docs/api.html#model_Model.findById
 const findPersonById = (personId, done) => {
-  Person.findById(personId,(err, data) => (err ? done(err) : done(null, data)));
+  Person.findById(personId, (err, data) => (err ? done(err) : done(null, data)));
   // Person.findOne(personId).exec();
   //done(null /*, data*/);
 };
@@ -82,14 +82,19 @@ const findPersonById = (personId, done) => {
 const findEditThenSave = (personId, done) => {
   const foodToAdd = "hamburger";
 
-  Person.findById(personId,(err, data) => (err ? done(err) : done(null, data)));
-  data.favoriteFoods.push(foodToAdd);
-  data.markModified('edited-field');
+  Person.findById(personId, (err, data) => {
+    if (err) {
+      done(err);
+    }
+    data.favoriteFoods.push(foodToAdd);
+    data.markModified('edited-field');
 
-  data.save((err, updatedPerson) => (err ? done(err) : done(null, updatedPerson)));
+    data.save((err, updatedPerson) => (err ? done(err) : done(null, updatedPerson)));
 
-  //done(null /*, data*/);
+    //done(null /*, data*/);
+  })
 };
+
 
 const findAndUpdate = (personName, done) => {
   const ageToSet = 20;
