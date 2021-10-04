@@ -149,7 +149,7 @@ Modify the queryChain function to find people who like the food specified by the
 const queryChain = (done) => {
   const foodToSearch = "burrito";
 
-  Person.find({ name: personName })
+  Person.find({ favoriteFoods: foodToSearch })
   .sort({ name: 'asc'})
   .limit(2)
   .select('-age')
