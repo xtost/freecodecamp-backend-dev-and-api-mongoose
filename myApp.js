@@ -117,8 +117,8 @@ const findAndUpdate = (personName, done) => {
 //10 https://mongoosejs.com/docs/api.html#model_Model.findOneAndRemove
 //10 https://mongoosejs.com/docs/api.html#model_Model.findByIdAndRemove
 const removeById = (personId, done) => {
-  Person.findByIdAndRemove(personId,(err, data) => (err ? done(err) : done(null, data)));
- // done(null /*, data*/);
+  Person.findByIdAndRemove(personId, (err, data) => (err ? done(err) : done(null, data)));
+  // done(null /*, data*/);
 };
 
 //11 https://www.freecodecamp.org/learn/back-end-development-and-apis/mongodb-and-mongoose/delete-many-documents-with-model-remove
@@ -131,11 +131,17 @@ const removeById = (personId, done) => {
 const removeManyPeople = (done) => {
   const nameToRemove = "Mary";
 
-  Person.remove( {name: nameToRemove},(err, data) => (err ? done(err) : done(null, data)));
+  Person.remove({ name: nameToRemove }, (err, data) => (err ? done(err) : done(null, data)));
 
   //done(null /*, data*/);
 };
 
+//12 https://www.freecodecamp.org/learn/back-end-development-and-apis/mongodb-and-mongoose/chain-search-query-helpers-to-narrow-search-results
+/* 12 Chain Search Query Helpers to Narrow Search Results
+If you don’t pass the callback as the last argument to Model.find() (or to the other search methods), the query is not executed. You can store the query in a variable for later use. This kind of object enables you to build up a query using chaining syntax. The actual db search is executed when you finally chain the method .exec(). You always need to pass your callback to this last method. There are many query helpers, here we'll use the most commonly used.
+
+Modify the queryChain function to find people who like the food specified by the variable named foodToSearch. Sort them by name, limit the results to two documents, and hide their age. Chain .find(), .sort(), .limit(), .select(), and then .exec(). Pass the done(err, data) callback to exec().
+*/
 const queryChain = (done) => {
   const foodToSearch = "burrito";
 
